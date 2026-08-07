@@ -241,7 +241,7 @@ export function Resume() {
                 </div>
               </div>
               <a
-                href="src/assets/Divyanshu_Mishra_Resume_.pdf"
+                href="/Divyanshu_Mishra_Resume_.pdf"
                 download
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03]"
               >
@@ -250,7 +250,7 @@ export function Resume() {
             </div>
           <div className="overflow-hidden rounded-2xl border border-glass-border">
   <iframe
-    src="src/assets/Divyanshu_Mishra_Resume_.pdf"
+    src="/Divyanshu_Mishra_Resume_.pdf"
     title="Resume Preview"
     className="h-[400px] w-full"
   />
