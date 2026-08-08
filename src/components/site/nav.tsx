@@ -32,8 +32,10 @@ export function Nav() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -46,26 +48,30 @@ export function Nav() {
       },
       { rootMargin: "-45% 0px -50% 0px" },
     );
+
     NAV_LINKS.forEach((l) => {
       const el = document.getElementById(l.id);
       if (el) observer.observe(el);
     });
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-[100] transition-all duration-300 ${
         scrolled ? "py-2" : "py-4"
       }`}
     >
       <nav
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300 sm:px-5 ${
-          scrolled ? "glass shadow-[0_10px_40px_-24px_black]" : "border border-transparent"
-        } mx-4 sm:mx-auto`}
+        className={`mx-4 flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-300 sm:mx-auto sm:px-5 ${
+          scrolled
+            ? "glass shadow-[0_10px_40px_-24px_black]"
+            : "border border-transparent"
+        }`}
         aria-label="Main navigation"
       >
-        <a href="#hero" className="font-display text-sm font-bold tracking-tight">
+       <a href="#hero" className="font-display text-sm font-bold tracking-tight">
           Divyanshu<span className="text-primary">.</span>
         </a>
 
@@ -93,36 +99,48 @@ export function Nav() {
             aria-label="Toggle color theme"
             className="grid h-9 w-9 place-items-center rounded-full border border-glass-border text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
           >
-            {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {dark ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
           </button>
+
           <a
             href="#contact"
             className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform hover:scale-[1.03] sm:inline-flex"
           >
             Hire Me
           </a>
+
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="grid h-9 w-9 place-items-center rounded-full border border-glass-border md:hidden"
+            className="relative z-[120] grid h-9 w-9 place-items-center rounded-full border border-glass-border md:hidden"
           >
-            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            {open ? (
+              <X className="h-4 w-4" />
+            ) : (
+              <Menu className="h-4 w-4" />
+            )}
           </button>
         </div>
       </nav>
 
       {open ? (
-        <div className="glass mx-4 mt-2 rounded-2xl p-3 md:hidden">
+        <div className="relative z-[110] mx-4 mt-2 rounded-2xl glass p-3 md:hidden">
           <ul className="grid gap-1">
             {NAV_LINKS.map((l) => (
               <li key={l.id}>
                 <a
                   href={`#${l.id}`}
                   onClick={() => setOpen(false)}
-                  className={`block rounded-xl px-3 py-2 text-sm ${
-                    active === l.id ? "bg-primary/10 text-primary" : "text-muted-foreground"
+                  className={`block rounded-xl px-3 py-2.5 text-sm transition-colors ${
+                    active === l.id
+                      ? "bg-primary/10 text-primary"
+                      : "text-muted-foreground hover:bg-primary/5 hover:text-foreground"
                   }`}
                 >
                   {l.label}
